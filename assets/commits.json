@@ -1,0 +1,102 @@
+{
+ "commits": [
+  {
+   "hash": "7515df2",
+   "date": "2026-11-19",
+   "subject": "docs: report pack with branch-headline tables, three-protocol +1 (main n2000 added: 14/15), data diff, coverage, failure cases, mandatory knife-edge caveats and traceability map"
+  },
+  {
+   "hash": "4b301fe",
+   "date": "2026-11-19",
+   "subject": "data: archive v16 FINAL audit as fallback record and draw the branch 200-row audit into audit_branch/ (60 cat/140 dog, UC425821) with 128px+32px sheets and ruler; audit/ and submission/ untouched pending student labels"
+  },
+  {
+   "hash": "9cd7257",
+   "date": "2026-11-18",
+   "subject": "eval: branch 60k w=0.75 hits 15/15 at 1000 and 2000/class and beats main by +1 mark at every protocol (250: 13v12, 1000: 15v14); win rule met, margins knife-edge (cat 0.901, recall +0.006); submission switch stays a student gate"
+  },
+  {
+   "hash": "0ea2a17",
+   "date": "2026-11-18",
+   "subject": "eval: branch 40k vs main 40k vs main 60k at 1000/class cuda w=1.0 - recovered diversity buys FID Excellent and +0.0365 recall at equal steps (13->14 marks) but only matches main 60k recall; win rule recall>=0.40 not met, ceiling stands"
+  },
+  {
+   "hash": "9ae0f20",
+   "date": "2026-11-18",
+   "subject": "experiments: 30k verified on disk; retire the milestone monitor after two fabricated events (tail-based and disk-derived) - authority is disk cross-checks plus the background process-exit notification"
+  },
+  {
+   "hash": "13b4e92",
+   "date": "2026-11-18",
+   "subject": "experiments: record the desktop-lag diagnosis (dGPU display contention + shared-heat throttling, CPU/RAM not saturated) and the student's keep-as-is ruling"
+  },
+  {
+   "hash": "8ca50c5",
+   "date": "2026-11-18",
+   "subject": "experiments: open the branch 40k run record - student go-ahead after sufficiency report, same config as main 60k, real-manifest startup smoke passed, pre-registered win rule restated"
+  },
+  {
+   "hash": "800ff0b",
+   "date": "2026-11-17",
+   "subject": "experiments: student full-scan ruling drops 216 R rows (3445-row branch manifest, 0 errors); coverage shows dog mode coverage 24/24 and PR 35.84 vs dev 37.53 - diversity bottleneck removed and survives the quality tightening"
+  },
+  {
+   "hash": "8dba06a",
+   "date": "2026-11-17",
+   "subject": "tools: probe_coverage gains --extra NAME=PATH and --out so any manifest (branch) can be diagnosed on the same dev ruler without a parallel script"
+  },
+  {
+   "hash": "99e78d9",
+   "date": "2026-11-17",
+   "subject": "experiments: second ruling drops 2 more R rows (3661-row branch manifest, 0 errors); close the branch observation loop at 100 looked rows and accept 6 known R residuals per stop-gate discipline"
+  },
+  {
+   "hash": "d2b153b",
+   "date": "2026-11-17",
+   "subject": "experiments: aggregate the dog-recovery recheck (8 unique ed1 pid typos repaired, 1716/1716 coverage), R=1320 then student drops 13 -> branch manifest 3663 rows 0 errors; training go held"
+  }
+ ],
+ "diffstat": "59 files changed, 3922 insertions(+), 4 deletions(-)",
+ "main_head": {
+  "hash": "f7fddae",
+  "date": "2026-11-17",
+  "subject": "experiments: design the isolated dog-diversity branch - dev contains profiles our cleaning over-removed; recover 1716 dog rows re-judged with roll-based upright, pre-registered win rule, main line untouched"
+ },
+ "branch_head": {
+  "hash": "7515df2",
+  "date": "2026-11-19",
+  "subject": "docs: report pack with branch-headline tables, three-protocol +1 (main n2000 added: 14/15), data diff, coverage, failure cases, mandatory knife-edge caveats and traceability map"
+ },
+ "main_commits": [
+  {
+   "hash": "f7fddae",
+   "date": "2026-11-17",
+   "subject": "experiments: design the isolated dog-diversity branch - dev contains profiles our cleaning over-removed; recover 1716 dog rows re-judged with roll-based upright, pre-registered win rule, main line untouched"
+  },
+  {
+   "hash": "06b667a",
+   "date": "2026-11-17",
+   "subject": "experiments: CLIP-space coverage diagnostic answers the recall-ceiling question - dog-side diversity bottleneck, cat covered; reject pre-v16 retrain (spec-bad rows, audit re-draw) for at most +1 mark"
+  },
+  {
+   "hash": "6eca630",
+   "date": "2026-11-17",
+   "subject": "eval: 1000/class probes at w=0.75/0.9 confirm 14/15 is the ceiling (no 15/15 combo); submission stays at the ruled 60k w=1.0"
+  },
+  {
+   "hash": "61aa8ec",
+   "date": "2026-11-17",
+   "subject": "docs: record the 60k w=1.0 ruling, the 14/15 final numbers and the FID protocol-dependence correction; DATA_CARD stays one page"
+  },
+  {
+   "hash": "6d599d4",
+   "date": "2026-11-17",
+   "subject": "eval: final official 1000/class --grading 14/15 (acc 0.9735 / FID 48.67 Excellent, recall 0.347 Good), memorization 0%, violations empty"
+  },
+  {
+   "hash": "8fbf739",
+   "date": "2026-11-17",
+   "subject": "model: graded submission = 60k EMA at guidance 1.0 on frozen v16 (student ruling); 9,628,419 params / 38.7 MB, pycache removed"
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "pool": 76250,
+ "v16": {
+  "rows": 2356,
+  "cat": 1121,
+  "dog": 1235
+ },
+ "recovery_candidates": 1716,
+ "recheck_compliant": 1320,
+ "ruling1_dropped": 13,
+ "ruling2_dropped": 2,
+ "ruling3_full_scan_dropped": 216,
+ "added_dog": 1089,
+ "branch": {
+  "rows": 3445,
+  "cat": 1121,
+  "dog": 2324
+ },
+ "coverage_dog": {
+  "v16": {
+   "n": 1235,
+   "dev_nn_median": 0.9256,
+   "dev_nn_p10": 0.8772,
+   "mode_coverage24@0.8": 0.9167,
+   "participation_ratio": 32.05,
+   "cov@0.7": 1.0,
+   "cov@0.8": 0.9956,
+   "cov@0.9": 0.7522
+  },
+  "branch": {
+   "n": 2324,
+   "dev_nn_median": 0.9295,
+   "dev_nn_p10": 0.8885,
+   "mode_coverage24@0.8": 1.0,
+   "participation_ratio": 35.84,
+   "cov@0.7": 1.0,
+   "cov@0.8": 1.0,
+   "cov@0.9": 0.8186
+  },
+  "v5": {
+   "n": 2951,
+   "dev_nn_median": 0.9311,
+   "dev_nn_p10": 0.8915,
+   "mode_coverage24@0.8": 1.0,
+   "participation_ratio": 37.5,
+   "cov@0.7": 1.0,
+   "cov@0.8": 1.0,
+   "cov@0.9": 0.8429
+  },
+  "dev": {
+   "n": 452,
+   "participation_ratio": 37.53
+  }
+ },
+ "coverage_cat_branch": {
+  "n": 1121,
+  "dev_nn_median": 0.9555,
+  "dev_nn_p10": 0.9058,
+  "mode_coverage24@0.8": 0.9583,
+  "participation_ratio": 32.11,
+  "cov@0.7": 1.0,
+  "cov@0.8": 0.9978,
+  "cov@0.9": 0.9204
+ },
+ "ruling_reasons": "possible non-real dogs: product packaging, costumes/hats, cartoons; student tightened his relaxed bar"
+}

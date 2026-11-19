@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cisc3024-catdog — main vs exp/dog-diversity</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="repo">
+  <div class="repo-line">
+    <span class="repo-name">cisc3024-catdog</span>
+    <span class="repo-sub">class-conditional 32×32 cat/dog heads, trained from scratch</span>
+  </div>
+  <div class="branch-bar">
+    <button id="br-main" class="branch-btn" data-branch="main">main</button>
+    <button id="br-exp" class="branch-btn active" data-branch="exp">exp/dog-diversity</button>
+    <span id="head-info" class="head-info"></span>
+  </div>
+  <div id="what-changed" class="what-changed"></div>
+  <nav class="tabs">
+    <button class="tab active" data-view="samples">Samples</button>
+    <button class="tab" data-view="metrics">Metrics</button>
+    <button class="tab" data-view="data">Data diff</button>
+    <button class="tab" data-view="commits">Commits</button>
+    <button class="tab" data-view="live">Live</button>
+  </nav>
+</header>
+
+<div class="banner warn">
+  Knife-edge win: 15/15 is measured on the <b>local dev reference</b> at n≥1000/class.
+  Cat accuracy 0.901 (+0.001) and recall 0.406 (+0.006) at n=1000; at n=250 the branch scores 13/15.
+  The hidden test may score 14/15. The stable claim is the <b>+1 mark over main at n=250/1000/2000</b>.
+  Main (v16, 14/15) remains a validated fallback.
+</div>
+
+<main>
+  <section id="view-samples" class="view active">
+    <h2>Same seed, same labels — three configs side by side</h2>
+    <p class="muted">seed 0, labels = 8 cat + 8 dog in every column. Images are the true 32×32 samples,
+    upscaled ×4 nearest-neighbour (no smoothing invented). No inference runs in this page.</p>
+    <label class="dev-toggle"><input type="checkbox" id="dev-on"> show dev reference column</label>
+    <div class="cols" id="sample-cols">
+      <figure><img src="assets/samples_main_w1.png" alt="main w=1.0 samples"><figcaption>main · v16 2,356 rows · 60k EMA · w=1.0</figcaption></figure>
+      <figure><img src="assets/samples_branch_w1.png" alt="branch w=1.0 samples"><figcaption>exp/dog-diversity · 3,445 rows · 60k EMA · w=1.0</figcaption></figure>
+      <figure><img src="assets/samples_branch_w075.png" alt="branch w=0.75 samples"><figcaption>exp/dog-diversity · 3,445 rows · 60k EMA · w=0.75 <b>(submitted config)</b></figcaption></figure>
+      <figure id="dev-fig" hidden><img src="assets/samples_dev.png" alt="dev reference"><figcaption>dev reference (real images)</figcaption></figure>
+    </div>
+    <h3>Observed at this seed</h3>
+    <ul id="captions" class="caps"></ul>
+  </section>
+
+  <section id="view-metrics" class="view">
+    <h2>Official evaluator, cuda, same dev reference</h2>
+    <div class="proto-bar">
+      <button class="proto" data-n="n250">250/class</button>
+      <button class="proto active" data-n="n1000">1000/class</button>
+      <button class="proto" data-n="n2000">2000/class</button>
+    </div>
+    <div class="table-wrap"><table id="metric-table"></table></div>
+    <div class="banner ok" id="delta-banner"></div>
+    <h3>Equal-step control (40k, 1000/class): the data variable alone</h3>
+    <div class="table-wrap"><table id="equal-table"></table></div>
+    <p class="muted">FID/recall depend on sample size; compare only within one protocol.
+    Guidance window on the branch at 1000/class: w=0.7→15, 0.75→15, 0.8→14, 0.9→14, 1.0→14.</p>
+  </section>
+
+  <section id="view-data" class="view">
+    <h2>What changed in the training set</h2>
+    <div class="flow" id="flow"></div>
+    <div class="table-wrap"><table id="cov-table"></table></div>
+    <p class="muted" id="ruling-note"></p>
+    <h3>File-level diff (main → exp/dog-diversity)</h3>
+    <ul class="caps">
+      <li>manifest.csv: +1,089 dog rows (v16 rows kept verbatim, first 2,356 identical)</li>
+      <li>weights.pt: 60k EMA retrained on the 3,445-row manifest (same architecture, 9,628,419 params)</li>
+      <li>sampling.json: guidance 1.0 → 0.75</li>
+      <li>audit: 200-row draw re-run on the new manifest (student labels gate the switch)</li>
+    </ul>
+  </section>
+
+  <section id="view-commits" class="view">
+    <h2 id="commit-title">Branch commits</h2>
+    <div class="table-wrap"><table id="commit-table"></table></div>
+    <p class="muted" id="diffstat"></p>
+  </section>
+
+  <section id="view-live" class="view">
+    <h2>Live generation — the model runs in your browser</h2>
+    <p class="muted">ONNX export of the same UNet (9.6M params), Heun 18 steps + CFG reimplemented in
+    JavaScript (demo/live/sampler.js), onnxruntime-web with WebGPU or WASM fallback. Weights download
+    once (38.7 MB per model, then cached). Initial noise uses a browser PRNG, so live images differ
+    from the torch-seeded static grids but follow the same distribution. TA ruling 2026-11-19:
+    public hosting allowed; do not hand code/weights directly to classmates.</p>
+    <div class="proto-bar" style="flex-wrap:wrap">
+      <select id="lv-model" class="proto"><option value="branch">branch (3,445 rows)</option><option value="main">main (v16)</option></select>
+      <select id="lv-species" class="proto"><option value="mixed">mixed</option><option value="cat">cat</option><option value="dog">dog</option></select>
+      <label class="muted">seed <input id="lv-seed" type="number" value="0" style="width:70px"></label>
+      <label class="muted">w <input id="lv-w" type="range" min="0.5" max="1.5" step="0.05" value="0.75"> <span id="lv-wval">0.75</span></label>
+      <label class="muted">n <input id="lv-count" type="number" min="1" max="8" value="4" style="width:50px"></label>
+      <button id="lv-go" class="proto">Generate</button>
+    </div>
+    <div style="height:6px;background:#21262d;border-radius:3px;margin:8px 0">
+      <div id="lv-bar" style="height:6px;width:0;background:var(--ok);border-radius:3px"></div>
+    </div>
+    <p class="muted" id="lv-status">idle — press Generate (first load downloads the model).</p>
+    <div id="lv-out" style="display:flex;flex-wrap:wrap;gap:10px"></div>
+  </section>
+</main>
+
+<footer>
+  Static grids pre-generated at torch seed 0 · live tab runs the ONNX model in your browser ·
+  sources: results/*.json, experiments/2026-11-17_branch_recover/, experiments/2026-11-18_branch_dog40k/ ·
+  not a guarantee of hidden-test marks.
+</footer>
+<script src="live/vendor/ort.webgpu.min.js"></script>
+<script src="app.js"></script>
+<script type="module" src="live/live.js"></script>
+</body>
+</html>

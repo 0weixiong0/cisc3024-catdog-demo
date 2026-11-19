@@ -1,0 +1,23 @@
+{
+ "seed": 0,
+ "labels": "8 cat + 8 dog, identical across columns",
+ "main_w1": [
+  "cat#5: head truncated by crop composition (frontal bias)",
+  "dog#1: soft merle texture",
+  "dogs repeat frontal pose across seeds (mode concentration)"
+ ],
+ "branch_w1": [
+  "same seed as main: dog#2/#6 breed/pose shift visible",
+  "cat fidelity close to main"
+ ],
+ "branch_w075": [
+  "cat#3: patchwork face artefact (cat acc 0.901 knife-edge)",
+  "cat#1: over-smoothed texture",
+  "dog#3: ear smear",
+  "dog#2: corgi frontal vs main beagle - diversity gain"
+ ],
+ "dev": [
+  "real 32x32 reference: profiles, props, hats present in dev"
+ ],
+ "tradeoff": "branch buys dog diversity and recall at the cost of cat fidelity; margins are knife-edge"
+}

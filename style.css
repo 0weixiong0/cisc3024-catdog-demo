@@ -1,0 +1,63 @@
+:root {
+  --bg: #0d1117; --panel: #161b22; --line: #30363d; --fg: #e6edf3;
+  --muted: #8b949e; --accent: #58a6ff; --ok: #3fb950; --warn: #d29922;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg);
+  font: 15px/1.5 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+.repo { background: var(--panel); border-bottom: 1px solid var(--line); padding: 14px 18px 0; }
+.repo-line { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; }
+.repo-name { font-weight: 700; font-size: 18px; color: var(--accent); }
+.repo-sub { color: var(--muted); font-size: 13px; }
+.branch-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0 8px; }
+.branch-btn { background: #21262d; color: var(--fg); border: 1px solid var(--line);
+  border-radius: 6px; padding: 5px 12px; cursor: pointer; font-size: 13px; }
+.branch-btn.active { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.head-info { color: var(--muted); font-size: 12px; font-family: ui-monospace, Consolas, monospace; }
+.what-changed { color: var(--fg); font-size: 13px; padding: 6px 10px; margin-bottom: 10px;
+  background: #1c2128; border-left: 3px solid var(--accent); border-radius: 4px; }
+.tabs { display: flex; gap: 4px; overflow-x: auto; }
+.tab { background: none; border: none; border-bottom: 2px solid transparent; color: var(--muted);
+  padding: 8px 14px; cursor: pointer; font-size: 14px; white-space: nowrap; }
+.tab.active { color: var(--fg); border-bottom-color: var(--warn); font-weight: 600; }
+.banner { margin: 14px 18px; padding: 10px 14px; border-radius: 6px; font-size: 13px; }
+.banner.warn { background: #2d2200; border: 1px solid var(--warn); color: #e3b341; }
+.banner.ok { background: #12261e; border: 1px solid var(--ok); color: #56d364; margin: 12px 0; }
+main { padding: 0 18px 30px; max-width: 1280px; margin: 0 auto; }
+.view { display: none; }
+.view.active { display: block; }
+h2 { font-size: 17px; margin: 18px 0 6px; }
+h3 { font-size: 14px; margin: 18px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.muted { color: var(--muted); font-size: 13px; }
+.dev-toggle { display: inline-flex; gap: 6px; align-items: center; margin: 8px 0; font-size: 13px; color: var(--muted); }
+.cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.cols.with-dev { grid-template-columns: repeat(4, 1fr); }
+figure { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+figure img { width: 100%; image-rendering: pixelated; border-radius: 4px; display: block; }
+figcaption { font-size: 12px; color: var(--muted); padding-top: 6px; }
+.caps { font-size: 13px; color: var(--fg); padding-left: 20px; }
+.caps li { margin: 4px 0; }
+.proto-bar { display: flex; gap: 6px; margin: 10px 0; }
+.proto { background: #21262d; border: 1px solid var(--line); color: var(--fg); border-radius: 6px;
+  padding: 4px 12px; cursor: pointer; font-size: 13px; }
+.proto.active { border-color: var(--ok); color: var(--ok); font-weight: 600; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; min-width: 480px; }
+th, td { padding: 7px 12px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+th { background: #1c2128; color: var(--muted); font-weight: 600; }
+td.num { font-family: ui-monospace, Consolas, monospace; }
+td.win { color: var(--ok); font-weight: 700; }
+.flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0; }
+.flow .step { background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+  padding: 8px 12px; font-size: 13px; }
+.flow .step b { display: block; font-size: 16px; color: var(--accent); }
+.flow .arrow { color: var(--muted); }
+footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 12px;
+  padding: 14px 18px; margin-top: 20px; }
+@media (max-width: 900px) { .cols, .cols.with-dev { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) {
+  .cols, .cols.with-dev { grid-template-columns: 1fr; }
+  .repo-sub { display: none; }
+  main { padding: 0 10px 24px; }
+  .banner { margin: 10px; }
+}

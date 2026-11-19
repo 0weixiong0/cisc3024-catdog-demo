@@ -1,0 +1,107 @@
+{
+ "main": {
+  "n250": {
+   "accuracy": 0.988,
+   "cat": 0.98,
+   "dog": 0.996,
+   "fid": 67.38,
+   "kid": 0.009044,
+   "recall": 0.332,
+   "precision": 0.9,
+   "memorization": 0.0,
+   "marks": 12
+  },
+  "n1000": {
+   "accuracy": 0.9735,
+   "cat": 0.962,
+   "dog": 0.985,
+   "fid": 48.67,
+   "kid": 0.009484,
+   "recall": 0.3473,
+   "precision": 0.8949,
+   "memorization": 0.0,
+   "marks": 14
+  },
+  "n2000": {
+   "accuracy": 0.9772,
+   "cat": 0.9685,
+   "dog": 0.986,
+   "fid": 45.45,
+   "kid": 0.00911,
+   "recall": 0.3739,
+   "precision": 0.9148,
+   "memorization": 0.0,
+   "marks": 14
+  }
+ },
+ "branch_w075": {
+  "n250": {
+   "accuracy": 0.914,
+   "cat": 0.892,
+   "dog": 0.936,
+   "fid": 63.67,
+   "kid": 0.005291,
+   "recall": 0.442,
+   "precision": 0.858,
+   "memorization": 0.0,
+   "marks": 13
+  },
+  "n1000": {
+   "accuracy": 0.9235,
+   "cat": 0.901,
+   "dog": 0.946,
+   "fid": 44.02,
+   "kid": 0.00594,
+   "recall": 0.406,
+   "precision": 0.8827,
+   "memorization": 0.0,
+   "marks": 15
+  },
+  "n2000": {
+   "accuracy": 0.921,
+   "cat": 0.9015,
+   "dog": 0.9405,
+   "fid": 41.27,
+   "kid": 0.005932,
+   "recall": 0.4181,
+   "precision": 0.8595,
+   "memorization": 0.0,
+   "marks": 15
+  }
+ },
+ "branch_w1_n1000": {
+  "accuracy": 0.9695,
+  "cat": 0.968,
+  "dog": 0.971,
+  "fid": 44.57,
+  "kid": 0.006311,
+  "recall": 0.3861,
+  "precision": 0.8894,
+  "memorization": 0.0,
+  "marks": 14
+ },
+ "equal_steps_40k": {
+  "main": {
+   "accuracy": 0.965,
+   "cat": 0.956,
+   "dog": 0.974,
+   "fid": 51.05,
+   "kid": 0.011937,
+   "recall": 0.3108,
+   "precision": 0.9159,
+   "memorization": 0.0,
+   "marks": 13
+  },
+  "branch": {
+   "accuracy": 0.958,
+   "cat": 0.943,
+   "dog": 0.973,
+   "fid": 48.41,
+   "kid": 0.009817,
+   "recall": 0.3473,
+   "precision": 0.8772,
+   "memorization": 0.0,
+   "marks": 14
+  }
+ }
+}
