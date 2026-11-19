@@ -46,7 +46,7 @@ function precondition(sigma) {
   };
 }
 
-export async function generate(ort, session, labels, seed, guidance, steps = 18, onProgress, noiseOverride) {
+export async function generate(ort, session, labels, seed, guidance, steps = 18, onProgress, noiseOverride, onStep) {
   const b = labels.length;
   const sched = sigmaSchedule(steps);
   const x = noiseOverride ? Float32Array.from(noiseOverride) : initialNoise(b, seed);
@@ -54,6 +54,13 @@ export async function generate(ort, session, labels, seed, guidance, steps = 18,
   const uncond = labels.map(() => 2);
   let nfe = 0;
   const total = steps * (guidance === 1 ? 1 : 2) * 2 - (guidance === 1 ? 1 : 2);
+  if (onStep) {
+    // Frame 0: the raw initial noise (unit variance), so the animation starts
+    // from static rather than from the first (near-flat) denoised estimate.
+    const prev = new Float32Array(x.length);
+    for (let j = 0; j < x.length; j++) prev[j] = Math.min(1, Math.max(0, (x[j] / sched[0] + 1) / 2));
+    await onStep(-1, steps, prev, sched[0]);
+  }
 
   async function denoise(xCur, sigma, lab) {
     const p = precondition(sigma);
@@ -83,6 +90,13 @@ export async function generate(ort, session, labels, seed, guidance, steps = 18,
   for (let i = 0; i < steps; i++) {
     const s = sched[i], sNext = sched[i + 1];
     const dCur = await d(x, s);
+    if (onStep) {
+      // Preview = the model's current denoised estimate (x0 prediction), not the
+      // noisy iterate: this is what makes the trajectory readable as blur->sharp.
+      const prev = new Float32Array(dCur.length);
+      for (let j = 0; j < dCur.length; j++) prev[j] = Math.min(1, Math.max(0, (dCur[j] + 1) / 2));
+      await onStep(i, steps, prev, s);
+    }
     const xEuler = new Float32Array(x.length);
     for (let j = 0; j < x.length; j++) xEuler[j] = x[j] + (sNext - s) * (x[j] - dCur[j]) / s;
     if (sNext > 0) {

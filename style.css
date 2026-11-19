@@ -52,6 +52,14 @@ td.win { color: var(--ok); font-weight: 700; }
   padding: 8px 12px; font-size: 13px; }
 .flow .step b { display: block; font-size: 16px; color: var(--accent); }
 .flow .arrow { color: var(--muted); }
+.live-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+  padding: 10px 12px; margin: 12px 0; }
+.panel-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; font-size: 14px; }
+.panel-head b { color: var(--accent); }
+.panel-status { margin-left: auto; font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
+.lv-track { height: 6px; background: #21262d; border-radius: 3px; margin: 8px 0; }
+.lv-fill { height: 6px; width: 0; background: var(--ok); border-radius: 3px; }
+.lv-out { display: flex; flex-wrap: wrap; gap: 10px; min-height: 20px; }
 footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 12px;
   padding: 14px 18px; margin-top: 20px; }
 @media (max-width: 900px) { .cols, .cols.with-dev { grid-template-columns: repeat(2, 1fr); } }

@@ -86,25 +86,40 @@
   </section>
 
   <section id="view-live" class="view">
-    <h2>Live generation — the model runs in your browser</h2>
-    <p class="muted">ONNX export of the same UNet (9.6M params), Heun 18 steps + CFG reimplemented in
-    JavaScript (demo/live/sampler.js), onnxruntime-web with WebGPU or WASM fallback. Weights download
-    once (38.7 MB per model, then cached). Initial noise uses a browser PRNG, so live images differ
-    from the torch-seeded static grids but follow the same distribution. TA ruling 2026-11-19:
-    public hosting allowed; do not hand code/weights directly to classmates.</p>
+    <h2>Live generation — main vs branch, same seed, stacked for comparison</h2>
+    <p class="muted">Both models run in your browser (ONNX export of the same 9.6M-param UNet,
+    Heun 18 steps + CFG in JavaScript, onnxruntime-web WebGPU with WASM fallback). Each panel
+    animates the diffusion trajectory: the model's denoised estimate at every step, from pure
+    noise to the final 32×32 image. Same seed and labels feed both models; each panel has its own
+    guidance w, so you can compare configs directly. Weights download once (38.7 MB per model,
+    then cached). Initial noise uses a browser PRNG, so live images differ from the torch-seeded
+    static grids but follow the same distribution. TA ruling 2026-11-19: public hosting allowed;
+    do not hand code/weights directly to classmates.</p>
     <div class="proto-bar" style="flex-wrap:wrap">
-      <select id="lv-model" class="proto"><option value="branch">branch (3,445 rows)</option><option value="main">main (v16)</option></select>
       <select id="lv-species" class="proto"><option value="mixed">mixed</option><option value="cat">cat</option><option value="dog">dog</option></select>
       <label class="muted">seed <input id="lv-seed" type="number" value="0" style="width:70px"></label>
-      <label class="muted">w <input id="lv-w" type="range" min="0.5" max="1.5" step="0.05" value="0.75"> <span id="lv-wval">0.75</span></label>
       <label class="muted">n <input id="lv-count" type="number" min="1" max="8" value="4" style="width:50px"></label>
-      <button id="lv-go" class="proto">Generate</button>
+      <button id="lv-go" class="proto">Generate both</button>
+      <span class="muted" id="lv-status">idle — press Generate both (first load downloads the models).</span>
     </div>
-    <div style="height:6px;background:#21262d;border-radius:3px;margin:8px 0">
-      <div id="lv-bar" style="height:6px;width:0;background:var(--ok);border-radius:3px"></div>
+    <div class="live-panel" id="panel-main">
+      <div class="panel-head">
+        <b>main</b><span class="muted">v16 · 2,356 rows · 60k EMA</span>
+        <label class="muted">w <input id="w-main" type="range" min="0.5" max="1.5" step="0.05" value="1.0"> <span id="wval-main">1.0</span></label>
+        <span class="muted panel-status" id="status-main">idle</span>
+      </div>
+      <div class="lv-track"><div class="lv-fill" id="bar-main"></div></div>
+      <div class="lv-out" id="out-main"></div>
     </div>
-    <p class="muted" id="lv-status">idle — press Generate (first load downloads the model).</p>
-    <div id="lv-out" style="display:flex;flex-wrap:wrap;gap:10px"></div>
+    <div class="live-panel" id="panel-branch">
+      <div class="panel-head">
+        <b>exp/dog-diversity</b><span class="muted">3,445 rows · 60k EMA</span>
+        <label class="muted">w <input id="w-branch" type="range" min="0.5" max="1.5" step="0.05" value="0.75"> <span id="wval-branch">0.75</span></label>
+        <span class="muted panel-status" id="status-branch">idle</span>
+      </div>
+      <div class="lv-track"><div class="lv-fill" id="bar-branch"></div></div>
+      <div class="lv-out" id="out-branch"></div>
+    </div>
   </section>
 </main>
 
